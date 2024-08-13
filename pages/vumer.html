@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Mídia Digital</title>
+    <link rel="stylesheet" href="../styles/vumer.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="../styles/video/Video IA.mp4" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+    </div>
+    <div class="overlay">
+        <div class="content">
+            <audio id="bg-audio" src="../styles/sounds/vumerIa.mp3"></audio>
+            <a href="../pages/notices.html" class="btn" id="enter-btn">Acessar página</a>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bg-audio');
+        const button = document.getElementById('enter-btn');
+        
+        button.style.display = 'none'; // Esconde o botão inicialmente
+
+        // Tenta reproduzir o áudio quando a página carrega
+        window.addEventListener('load', function() {
+            audio.play().then(() => {
+                console.log("O áudio começou a tocar.");
+            }).catch(error => {
+                console.log("Autoplay bloqueado: ", error);
+                // Tentar reproduzir após uma interação do usuário
+                window.addEventListener('click', function() {
+                    audio.play();
+                });
+            });
+        });
+
+        // Mostra o botão quando o áudio termina
+        audio.addEventListener('ended', function() {
+            button.style.display = 'inline-block'; // Mostra o botão
+        });
+    </script>
+</body>
+</html>
